@@ -114,7 +114,7 @@
     NSString *xmlString4 = [[NSString alloc]initWithContentsOfURL:cwblUrlPath encoding:NSUTF8StringEncoding error:nil];
     
     // display test.xml file content
-    NSLog(@"[Way4] xmlDictionary: %@", xmlString4);
+    //NSLog(@"[Way4] xmlDictionary: %@", xmlString4);
     
     // do XMLReader
     NSError *parseError4 = nil;
@@ -135,7 +135,7 @@
     // get first location: locationName
     NSArray *location = [cwbopendata objectForKey: @"location"];
     NSArray *firstLocation = [location objectAtIndex:0];
-    //NSLog(@"[Way4] firstLocation: %@" , firstLocation);
+    NSLog(@"[Way4] firstLocation: %@" , firstLocation);
     NSDictionary *locationName = [[firstLocation valueForKey: @"locationName"] objectForKey:@"text"];
     NSLog(@"[Way4] locationName: %@" , locationName);
     
