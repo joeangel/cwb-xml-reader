@@ -101,6 +101,51 @@
     // get text from strTitle
     NSString *strText = [dictTitle objectForKey: @"text"];
     NSLog(@"[Way3] strText: %@" , strText);
+    
+    
+    /****************************** way 4 ******************************/
+    NSLog(@"[Way4] Read from website: opendata.cwb.gov.tw");
+    
+    // get a reference
+    NSURL *cwblUrlPath = [NSURL URLWithString:@"http://opendata.cwb.gov.tw/opendataapi?dataid=O-A0002-001&authorizationkey=CWB-F93F7B14-FCB0-4224-9796-B42B2B80DE4B"];
+    NSLog(@"[Way4] URL Path: %@", cwblUrlPath);
+    
+    // read the contents from a URL into a string
+    NSString *xmlString4 = [[NSString alloc]initWithContentsOfURL:cwblUrlPath encoding:NSUTF8StringEncoding error:nil];
+    
+    // display test.xml file content
+    NSLog(@"[Way4] xmlDictionary: %@", xmlString4);
+    
+    // do XMLReader
+    NSError *parseError4 = nil;
+    NSDictionary *xmlDictionary4 = [XMLReader dictionaryForXMLString:xmlString4 error:&parseError4];
+    
+    // Print the dictionary after doing XMLReader
+    //NSLog(@"[Way4] xmlDictionary: %@", xmlDictionary4);
+    
+    // Get the first value: questions.question.title
+    NSLog(@"[Way4] get the first value: dataid");
+    
+    NSDictionary *cwbopendata = [xmlDictionary4 objectForKey: @"cwbopendata"];
+    
+    // dataid
+    NSDictionary *dataid = [[cwbopendata objectForKey: @"dataid"] objectForKey:@"text"];
+    NSLog(@"[Way4] dataid: %@" , dataid);
+    
+    // get first location: locationName
+    NSArray *location = [cwbopendata objectForKey: @"location"];
+    NSArray *firstLocation = [location objectAtIndex:0];
+    //NSLog(@"[Way4] firstLocation: %@" , firstLocation);
+    NSDictionary *locationName = [[firstLocation valueForKey: @"locationName"] objectForKey:@"text"];
+    NSLog(@"[Way4] locationName: %@" , locationName);
+    
+    // get all weatherElement in firstLocation
+    NSArray *weatherElement = [firstLocation valueForKey:@"weatherElement"];
+    for (id i in weatherElement) {
+        NSDictionary *elementName = [[i objectForKey:@"elementName"] objectForKey:@"text"];
+        NSDictionary *elementValue = [[[i objectForKey:@"elementValue"] objectForKey:@"value"] objectForKey:@"text"];
+        NSLog(@"[Way4] all weatherElement: %@: %@" , elementName, elementValue);
+    }
 }
 
 - (void)didReceiveMemoryWarning {
