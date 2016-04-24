@@ -20,13 +20,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    NSURL *url = [NSURL URLWithString:@"http://222.73.161.212/ispace2/servlet/com.lemon.xml.XmlAction"];
-    NSLog(@"%@", url);
-    
-    
-        //    NSArray* myDictionary = [NSArray arrayWithContentsOfURL:@"http://opendata.cwb.gov.tw/opendataapi?dataid=O-A0002-001&authorizationkey=CWB-F93F7B14-FCB0-4224-9796-B42B2B80DE4B"];
-    
-    
     /****************************** way 1 ******************************/
     NSLog(@"[Way1] Read from XML String");
     
